@@ -7,7 +7,7 @@ The concept of the app is a social media app where bootcamp students, alumni, an
 
 I used Sketch to make my wireframes for this project. 
 
-# DevLoop
+# DevPool
 
 ![GitHub Logo](https://i.imgur.com/PvzcPtB.png)
 
