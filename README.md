@@ -20,3 +20,8 @@ User Story: The user clicks on login to bring up login form. Then the user enter
 User Story: The user clicks on join to bring up join form. The user enters full name, email, username and password to register.
 
 ![GitHub Logo](https://i.imgur.com/2v2KQIO.png)
+
+
+### Join Screen  
+User Story: After registerting the user will be prompted to fill out a profile form for their page.  
+![GitHub Logo](https://i.imgur.com/tQQmTyz.png)
