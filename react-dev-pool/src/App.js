@@ -1,4 +1,4 @@
-import React from 'react';
+import React { Component } from 'react';
 import './App.css';
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
@@ -16,6 +16,11 @@ export default class App extends Component {
 			loggedInUserEmail: 
 		}
 	}
+
+
+
+// <-------------------------------------->
+// REGISTER API ROUTE 
 
 	register = async (registerInfo) => {
 		console.log("register() in App.js called with the following info", registerInfo); 
@@ -38,17 +43,108 @@ export default class App extends Component {
 			console.log("registerResponse", registerResponse); 
 			const registerJson = await registerResponse.json()
 			console.log("registerJson", registerJson); 
+
+
+
+			if(registerResponse.status === 201) {
+				this.setState({
+					loggedIn: true, 
+					loggedInUserEmail: registerJson.data.email
+				})
+			}
+		}	catch(err) {
+			console.error("Error trying to register with API")
+			console.error(err)
 		}
+
 	}
+
+
+
+// <-------------------------------------->
+// LOGIN API ROUTE 
+	login = async (loginInfo) => {
+		console.log("login() in App.js called with the following info", loginInfo)
+		const url = process.env.REACT_APP_API_URL + '/api/v1/users/login'
+
+		try {
+			const loginResponse = await fetch(url, {
+				crendentials: 'include', // sends cookie
+				method: 'POST', 
+				body: JSON.stringify(loginInfo), 
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+
+			console.log("loginResponse", loginResponse)
+			const loginJson = await loginResponse.json() 
+			console.log("loginJson", loginJson); 
+
+			if(loginResponse.status === 200) {
+				this.setState({
+					loggedIn: true, 
+					loggedInUserEmail: loginJson.data.email
+				})
+			}
+		}	catch(error) {
+			console.error("Error trying to log in with API")
+			console.error(error)
+		}
+
+	}
+
+
+
+// <-------------------------------------->
+// LOGOUT API ROUTE 
+	logout = async () => {
+		try {
+			const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
+
+			const logoutResponse = await fetch(url, {
+				crendentials: 'include'
+			})
+			console.log("logoutResponse", logoutResponse)
+			const logoutJson = await logoutResponse.json() 
+			console.log("logoutJson", logoutJson); 
+
+		if(logoutResponse.status === 200) {
+			this.setState({
+				loggedIn: false, 
+				loggedInUserEmail: ''
+			})
+
+		}
+
+	}	catch(error) {
+		console.error("Error logging out with API")
+		console.error(error)
+	}
+
 }
 
-function App() {
-	console.log(process.env)
-  return (
-    <div className="App">
-      <PostContainer></PostContainer>
-    </div>
-  );
+// <-------------------------------------->
+// RENDER VIEW 
+render() {
+	return (
+		<div className="App">
+		{
+			this.state.loggedIn
+			?
+			<React.Fragment>
+				<Header email={this.state.loggedInUserEmail} logout={this.logout} />
+				<PostContainer />
+			</React.Fragment>
+			:
+			<LoginRegisterForm
+				login={this.login}
+				register={this.register}
+			/>
+		}
+		</div>
+	); 
+}
 }
 
 export default App;
