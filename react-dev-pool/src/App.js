@@ -1,4 +1,4 @@
-import React { Component } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
@@ -13,7 +13,7 @@ export default class App extends Component {
 
 		this.state = {
 			loggedIn: false, 
-			loggedInUserEmail: 
+			loggedInUserEmail: ''
 		}
 	}
 
@@ -33,7 +33,7 @@ export default class App extends Component {
 				// it will send your cookie
 				// in unit 2 this was being done automatically for you by the browser
 				// IF YOU LEAVE IT OUT, YOU WILL NOT BE AUTHENTICATED 
-				crendentials: 'include', 
+				credentials: 'include', 
 				method: 'POST', 
 				body: JSON.stringify(registerInfo), 
 				headers: {
@@ -69,7 +69,7 @@ export default class App extends Component {
 
 		try {
 			const loginResponse = await fetch(url, {
-				crendentials: 'include', // sends cookie
+				credentials: 'include', // sends cookie
 				method: 'POST', 
 				body: JSON.stringify(loginInfo), 
 				headers: {
@@ -103,7 +103,7 @@ export default class App extends Component {
 			const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
 
 			const logoutResponse = await fetch(url, {
-				crendentials: 'include'
+				credentials: 'include'
 			})
 			console.log("logoutResponse", logoutResponse)
 			const logoutJson = await logoutResponse.json() 
@@ -146,5 +146,3 @@ render() {
 	); 
 }
 }
-
-export default App;
