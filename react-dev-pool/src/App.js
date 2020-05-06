@@ -33,7 +33,7 @@ export default class App extends Component {
 				// it will send your cookie
 				// in unit 2 this was being done automatically for you by the browser
 				// IF YOU LEAVE IT OUT, YOU WILL NOT BE AUTHENTICATED 
-				crendentials: 'include', 
+				credentials: 'include', 
 				method: 'POST', 
 				body: JSON.stringify(registerInfo), 
 				headers: {

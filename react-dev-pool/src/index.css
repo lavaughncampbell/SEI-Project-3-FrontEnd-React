@@ -12,3 +12,8 @@ code {
     monospace;
 }
 
+.fake-link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
