@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Form, Button, Label } from 'semantic-ui-react'
+import '../index.css'
 
 export default class LoginRegisterForm extends Component {
 

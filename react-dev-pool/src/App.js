@@ -1,4 +1,4 @@
-import React { Component } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import PostContainer from './PostContainer'
 import LoginRegisterForm from './LoginRegisterForm'
@@ -13,7 +13,7 @@ export default class App extends Component {
 
 		this.state = {
 			loggedIn: false, 
-			loggedInUserEmail: 
+			loggedInUserEmail: ''
 		}
 	}
 
@@ -147,4 +147,3 @@ render() {
 }
 }
 
-export default App;
