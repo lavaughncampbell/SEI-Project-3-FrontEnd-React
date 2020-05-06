@@ -69,7 +69,7 @@ export default class App extends Component {
 
 		try {
 			const loginResponse = await fetch(url, {
-				crendentials: 'include', // sends cookie
+				credentials: 'include', // sends cookie
 				method: 'POST', 
 				body: JSON.stringify(loginInfo), 
 				headers: {
@@ -103,7 +103,7 @@ export default class App extends Component {
 			const url = process.env.REACT_APP_API_URL + "/api/v1/users/logout"
 
 			const logoutResponse = await fetch(url, {
-				crendentials: 'include'
+				credentials: 'include'
 			})
 			console.log("logoutResponse", logoutResponse)
 			const logoutJson = await logoutResponse.json() 
