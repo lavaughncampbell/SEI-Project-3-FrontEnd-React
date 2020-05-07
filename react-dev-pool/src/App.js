@@ -129,21 +129,21 @@ export default class App extends Component {
 render() {
 	return (
 		<div className="App">
-		{
-			this.state.loggedIn
-			?
-			<React.Fragment>
-				<Header email={this.state.loggedInUserEmail} logout={this.logout} />
-				<PostContainer />
-			</React.Fragment>
-			:
-			<LoginRegisterForm
-				login={this.login}
-				register={this.register}
-			/>
-		}
+			{
+				this.state.loggedIn
+				?
+				<React.Fragment>
+					<Header email={this.state.loggedInUserEmail} logout={this.logout} />
+					<PostContainer />
+				</React.Fragment>
+				:
+				<LoginRegisterForm
+					login={this.login}
+					register={this.register}
+				/>
+			}
 		</div>
 	); 
-}
+	}
 }
 

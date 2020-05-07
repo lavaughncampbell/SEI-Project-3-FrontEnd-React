@@ -41,6 +41,8 @@ export default class EditPostModal extends Component {
     // let's make this modal render with semantic ui!
     // https://react.semantic-ui.com/modules/modal/
 
+    	console.log("HERE IS STATE")
+    	console.log(this.state)
     return(
       <Modal open={true} closeIcon={true} onClose={this.props.closeModal}> 
         <Header>
@@ -72,3 +74,4 @@ export default class EditPostModal extends Component {
     )    
   }
 }
+

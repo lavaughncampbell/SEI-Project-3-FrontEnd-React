@@ -12,7 +12,7 @@ export default class PostContainer extends Component {
 
 		this.state = {
 			posts: [],
-			idOfDogToEdit: -1
+			// idOfDogToEdit: -1
 		}
 	}
 
@@ -160,42 +160,42 @@ export default class PostContainer extends Component {
 // <-------------------------------------->
 // EDIT POSTS / MODAL 
 
-	updatePost = async (updatePostInfo) => {
-		const url = process.env.REACT_APP_API_URL + "/api/v1/posts/" + this.state.idOfPostToEdit
+	// updatePost = async (updatePostInfo) => {
+	// 	const url = process.env.REACT_APP_API_URL + "/api/v1/posts/" + this.state.idOfPostToEdit
 
-		try {
-			const updatePostResponse = await fetch(url, {
-				credentials: 'include', 
-				method: 'PUT', 
-				body: JSON.stringify(updatePostInfo), 
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			})
-			console.log("updatePostResponse", updatePostResponse)
-			const updatePostJson = await updatePostResponse.json()
-			console.log("updatePostJson", updatePostJson)
+	// 	try {
+	// 		const updatePostResponse = await fetch(url, {
+	// 			credentials: 'include', 
+	// 			method: 'PUT', 
+	// 			body: JSON.stringify(updatePostInfo), 
+	// 			headers: {
+	// 				'Content-Type': 'application/json'
+	// 			}
+	// 		})
+	// 		console.log("updatePostResponse", updatePostResponse)
+	// 		const updatePostJson = await updatePostResponse.json()
+	// 		console.log("updatePostJson", updatePostJson)
 
-			if(updatePostResponse.status == 200) {
-				const posts = this.state.posts
-				const indexOfPostBeingUpdated = posts.findIndex(post => post.id == this.state.idOfPostToEdit)
-				posts[indexOfPostBeingUpdated] = updatePostJson.data
-				this.setState({
-					posts: posts, 
-					idOfPostToEdit: -1 // close the modal 
-				})
-			}
-		} catch(err) {
-			console.error("Error updated")
-			console.error(err)
-		}
-	}
+	// 		if(updatePostResponse.status == 200) {
+	// 			const posts = this.state.posts
+	// 			const indexOfPostBeingUpdated = posts.findIndex(post => post.id == this.state.idOfPostToEdit)
+	// 			posts[indexOfPostBeingUpdated] = updatePostJson.data
+	// 			this.setState({
+	// 				posts: posts, 
+	// 				idOfPostToEdit: -1 // close the modal 
+	// 			})
+	// 		}
+	// 	} catch(err) {
+	// 		console.error("Error updated")
+	// 		console.error(err)
+	// 	}
+	// }
 
-	closeModal = () => {
-		this.setState({
-			idOfPostToEdit: -1
-		})
-	}
+	// closeModal = () => {
+	// 	this.setState({
+	// 		idOfPostToEdit: -1
+	// 	})
+	// }
 
 
 
@@ -215,16 +215,19 @@ export default class PostContainer extends Component {
 					editPost={this.editPost}
 				/>
 				{
-					this.state.idOfPostToEdit !== -1
-					&&
-					<EditPostModal
-						key={this.state.idOfPostToEdit}
-						postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
-						updatePost={this.updatePost}
-						closeModal={this.closeModal}
-					/>
+					// this.state.idOfPostToEdit !== -1
+					// &&
+					// <EditPostModal
+					// 	key={this.state.idOfPostToEdit}
+					// 	postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
+					// 	updatePost={this.updatePost}
+					// 	closeModal={this.closeModal}
+					// />
 				}
 			</React.Fragment>
 		)
 	}
 }
+
+
+
