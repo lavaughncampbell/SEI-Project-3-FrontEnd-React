@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Form, Button, Label, Segment } from 'semantic-ui-react'
+import { Form, Button, Label, Segment, Modal, Header } from 'semantic-ui-react'
+import '../index.css'
 
 export default class EditPostModal extends Component {
 	constructor(props) {
@@ -20,29 +21,45 @@ export default class EditPostModal extends Component {
   	})
   }
 
+  handleSubmit = (event) => {
+  	event.preventDefault()
+  	this.props.updatePost(this.state)
+  }
+
   render() {
+  	console.log("THIS IS STATE IN THE EDITPOSTMODAL")
+  	console.log(this.state)
+    // let's make this modal render with semantic ui!
+    // https://react.semantic-ui.com/modules/modal/
+
     return(
-      <Segment> 
-        <h3>Enter new info</h3>
-        <Form>
-          <Form.Input 
-            type="text"
-            name="description"
-            value={this.state.description}
-            placeholder="What's on your mind?"
-            onChange={this.handleChange}
-          />
-          <Label>Breed:</Label>
-          <Form.Input 
-            type="text"
-            name="comment"
-            value={this.state.comment}  
-            placeholder="Comment Here"
-            onChange={this.handleChange}
-          />
-          <Button type="Submit">Update Post</Button>
-        </Form>
-      </Segment>
+      <Modal open={true} closeIcon={true} onClose={this.props.closeModal}> 
+        <Header>
+          <h3>Enter new info</h3>
+        </Header>
+        <Modal.Content>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Input 
+              type="text"
+              name="description"
+              value={this.state.description}
+              placeholder="What's on your mind?"
+              onChange={this.handleChange}
+            />
+            <Label>Comment:</Label>
+            <Form.Input 
+              type="text"
+              name="comment"
+              value={this.state.comment}  
+              placeholder="Comment Here"
+              onChange={this.handleChange}
+            />
+            <Modal.Actions>
+              <Button type="Submit">Update Posts</Button>
+            </Modal.Actions>
+          </Form>
+        </Modal.Content>
+      </Modal>
     )    
   }
-} 
+}

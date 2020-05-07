@@ -39,12 +39,12 @@ export default class PostContainer extends Component {
 			const url = process.env.REACT_APP_API_URL + " /api/v1/posts/"
 			console.log("about to fetch data from:");
 			console.log(url);
-			const postResponse = await fetch(url, {
-				credentials: 'include'
+			const postsResponse = await fetch(url, {
+				credentials: 'include', 
 			})
 			console.log("here is the Response from the fetch call:");
-			console.log(postResponse);
-			const postsJson = await postResponse.json()
+			console.log(postsResponse);
+			const postsJson = await postsResponse.json()
 			console.log("here is the data we got in getPosts in PostContainer")
 			console.log(postsJson);
 
@@ -54,7 +54,7 @@ export default class PostContainer extends Component {
 
 
 		} catch(err) {
-			console.error("Error getting dog data", err)
+			console.error("Error getting post data", err)
 		}
 	}
 
@@ -99,7 +99,7 @@ export default class PostContainer extends Component {
 
 
 // <-------------------------------------->
-// DELETE POSTS 
+// CREATE  POSTS 
 	
 	createPost = async (postToAdd) => {
 		console.log("here is the post you are trying to add")
@@ -160,42 +160,55 @@ export default class PostContainer extends Component {
 // <-------------------------------------->
 // EDIT POSTS / MODAL 
 
-	// updatePost = async (updatePostInfo) => {
-	// 	const url = process.env.REACT_APP_API_URL + "/api/v1/posts/" + this.state.idOfPostToEdit
+	updatePost = async (updatedPostInfo) => {
+    // db query to update dog
+    const url = process.env.REACT_APP_API_URL + "/api/v1/posts/" + this.state.idOfPostToEdit
 
-	// 	try {
-	// 		const updatePostResponse = await fetch(url, {
-	// 			credentials: 'include', 
-	// 			method: 'PUT', 
-	// 			body: JSON.stringify(updatePostInfo), 
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			}
-	// 		})
-	// 		console.log("updatePostResponse", updatePostResponse)
-	// 		const updatePostJson = await updatePostResponse.json()
-	// 		console.log("updatePostJson", updatePostJson)
+    try {
+      const updatePostResponse = await fetch(url, {
+      	credentials: 'include', 
+        method: 'PUT',
+        body: JSON.stringify(updatedPostInfo), 
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log("updatePostResponse", updatePostResponse)
+      const updatePostJson = await updatePostResponse.json()
+      console.log("updatePostJson", updatePostJson);
 
-	// 		if(updatePostResponse.status == 200) {
-	// 			const posts = this.state.posts
-	// 			const indexOfPostBeingUpdated = posts.findIndex(post => post.id == this.state.idOfPostToEdit)
-	// 			posts[indexOfPostBeingUpdated] = updatePostJson.data
-	// 			this.setState({
-	// 				posts: posts, 
-	// 				idOfPostToEdit: -1 // close the modal 
-	// 			})
-	// 		}
-	// 	} catch(err) {
-	// 		console.error("Error updated")
-	// 		console.error(err)
-	// 	}
-	// }
+      // this.setState({idOfPostToEdit: -1})
+      // this.getPosts()
 
-	// closeModal = () => {
-	// 	this.setState({
-	// 		idOfPostToEdit: -1
-	// 	})
-	// }
+      // new stuff 
+      if(updatePostResponse.status == 200) {
+      	const posts = this.state.posts
+      	const indexOfPostBeingUpdated = posts.findIndex(post => post.id == this.state.idOfPostToEdit)
+      	console.log("WHY IS IT NOT UPDATING ON THE SCREEN")
+      	console.log(indexOfPostBeingUpdated)
+      	posts[indexOfPostBeingUpdated] = updatePostJson.data
+      	this.setState({
+      		posts: posts, 
+      		idOfPostToEdit: -1 // close the model 
+      	})
+      }
+
+    } catch(err) {
+      console.error("Error updating post info")
+      console.error(err)
+    }
+
+    // then replace the dog at the currently selected id in state
+    // with this updatedDogInfo
+
+  }
+
+  closeModal = () => {
+  	this.setState({
+  		idOfPostToEdit: -1
+  	})
+  }
+
 
 
 
@@ -218,10 +231,10 @@ export default class PostContainer extends Component {
 					this.state.idOfPostToEdit !== -1
 					&&
 					<EditPostModal
-				// 	// 	key={this.state.idOfPostToEdit}
+						key={this.state.idOfPostToEdit}
 						postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
-				// 	// 	updatePost={this.updatePost}
-				// 	// 	closeModal={this.closeModal}
+						updatePost={this.updatePost}
+						closeModal={this.closeModal}
 					/>
 				}
 			</React.Fragment>
