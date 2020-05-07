@@ -12,7 +12,7 @@ export default class PostContainer extends Component {
 
 		this.state = {
 			posts: [],
-			// idOfDogToEdit: -1
+			idOfPostToEdit: -1
 		}
 	}
 
@@ -215,14 +215,14 @@ export default class PostContainer extends Component {
 					editPost={this.editPost}
 				/>
 				{
-					// this.state.idOfPostToEdit !== -1
-					// &&
-					// <EditPostModal
-					// 	key={this.state.idOfPostToEdit}
-					// 	postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
-					// 	updatePost={this.updatePost}
-					// 	closeModal={this.closeModal}
-					// />
+					this.state.idOfPostToEdit !== -1
+					&&
+					<EditPostModal
+				// 	// 	key={this.state.idOfPostToEdit}
+				// 	// 	postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
+				// 	// 	updatePost={this.updatePost}
+				// 	// 	closeModal={this.closeModal}
+					/>
 				}
 			</React.Fragment>
 		)
