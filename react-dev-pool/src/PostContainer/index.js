@@ -219,7 +219,7 @@ export default class PostContainer extends Component {
 					&&
 					<EditPostModal
 				// 	// 	key={this.state.idOfPostToEdit}
-				// 	// 	postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
+						postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
 				// 	// 	updatePost={this.updatePost}
 				// 	// 	closeModal={this.closeModal}
 					/>

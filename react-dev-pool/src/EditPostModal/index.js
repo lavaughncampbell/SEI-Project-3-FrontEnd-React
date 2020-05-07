@@ -5,9 +5,12 @@ export default class EditPostModal extends Component {
 	constructor(props) {
     super(props)
 
+    console.log("props in constructor in EditPostModal")
+    console.log(props)
+
     this.state = {
-      description: '',
-      comment: ''
+      description: props.postToEdit.description,
+      comment: props.postToEdit.comment
     }
   }
 
