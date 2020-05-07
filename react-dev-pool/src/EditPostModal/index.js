@@ -14,6 +14,12 @@ export default class EditPostModal extends Component {
     }
   }
 
+  handleChange = (event) => {
+  	this.setState({
+  		[event.target.name]: event.target.value
+  	})
+  }
+
   render() {
     return(
       <Segment> 
@@ -24,6 +30,7 @@ export default class EditPostModal extends Component {
             name="description"
             value={this.state.description}
             placeholder="What's on your mind?"
+            onChange={this.handleChange}
           />
           <Label>Breed:</Label>
           <Form.Input 
@@ -31,6 +38,7 @@ export default class EditPostModal extends Component {
             name="comment"
             value={this.state.comment}  
             placeholder="Comment Here"
+            onChange={this.handleChange}
           />
           <Button type="Submit">Update Post</Button>
         </Form>
